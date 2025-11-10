@@ -1,0 +1,13 @@
+1. This project is to learn react js with all the concepts
+
+2. Here is steps to run the project.
+
+   a. Get the project from github
+   b. Install node.js in your system: https://nodejs.org/en/download version 24
+   c. Install npm in your system
+   d. Check it using node -v and npm -v command if it in your system n
+   d.1 node version must be 24(LTS)
+   e. run npm init to create package.json file(first time in your project to create package.json file)
+   f. We are using parcel as bundler
+   g. install the dependencies using this command- npm i
+   h. run project using npx parcel index.html
