@@ -11,3 +11,25 @@
    f. We are using parcel as bundler
    g. install the dependencies using this command- npm i
    h. run project using npx parcel index.html
+
+
+/**
+ *  Header
+ *   - logo
+ *   - nav items
+ *      -home
+ *      - about us
+ *      - contact us
+ *      - cart
+ *  Body
+ *   - search bar
+ *   - RestaurantContainer
+ *      - RestaurantCard
+ *
+ * Footer
+ *    -copyright
+ *    -links
+ *    -address
+ *    -contact
+ *    -social media links
+ */
