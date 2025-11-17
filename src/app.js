@@ -5,6 +5,9 @@ import POC from './POC/POC'
 
 
 const AppLayout = () => {
+
+  console.log('<Header />', <Header />)
+
   return (
     <div className="app">
       <Header />

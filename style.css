@@ -26,7 +26,6 @@
 .search{
   margin: 20px;
   padding: 20px;
-  border: 1px solid black;
 }
 
 .restaurant-card{
@@ -45,4 +44,7 @@
   cursor: pointer;
   border: 2px solid red;
 
+}
+.search-btn{
+  margin: 10px;
 }
