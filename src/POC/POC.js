@@ -17,6 +17,15 @@ const POC = () => {
             
             }}>Click me</button>
             <h2>{counter}</h2>
+            
+            <h1>
+                Remaining PoC:
+                1. Memo <br/>
+                2. useMemo <br/>
+                3. useCallback <br/>
+                4. Language Traslator <br/>
+                
+            </h1>
         </div>
     )
 }
