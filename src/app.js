@@ -6,6 +6,7 @@ import POC from "./POC/POC";
 import { RouterProvider, createBrowserRouter, Outlet } from "react-router-dom";
 import Contact from "./components/Contact";
 import Error from "./components/Error";
+import RestaruntDetails from './components/RestaurantDetails';
 
 const AppLayout = () => {
   return (
@@ -37,6 +38,10 @@ const appRouter = createBrowserRouter([
         path: "/poc",
         element: <POC />,
       },
+      {
+        path: '/restaurant/:resId/:resName',
+        element: <RestaruntDetails />
+      }
     ],
     errorElement: <Error />,
   },

@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import RestaurantCard from "./RestaurantCard";
+import { Link } from "react-router-dom";
 
 const Body = () => {
   const [listOfResteaurants, setListOfRestaurants] = useState([]);
@@ -51,7 +52,7 @@ const Body = () => {
       </div>
       <div className="restaurant-container">
         {filteredRestaurants.map((res) => {
-          return <RestaurantCard resObj={res} key={res.info.id} />;
+          return <Link to={'/restaurant/' + res.info.id +'/'+ res.info.name} key={res.info.id}> <RestaurantCard resObj={res} key={res.info.id} /> </Link>;
         })}
       </div>
     </div>
