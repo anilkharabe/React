@@ -16,8 +16,6 @@ const Header = () => {
     console.log('useEffect called');
   },[btnNameReact])
 
-  console.log('here is Header components')
-
   return (
     <div className="header">
       <div className="logoContainer">
