@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import resDetails from "../utils/resDetails";
 
@@ -48,6 +48,6 @@ const RestaruntDetails = () => {
   );
 };
 
-export default RestaruntDetails;
+export default React.memo(RestaruntDetails);
 
 // https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=18.5288974&lng=73.8665321&restaurantId=${resId}&catalog_qa=undefined&submitAction=ENTER

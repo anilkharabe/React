@@ -1,4 +1,4 @@
-import {Component} from "react";
+import React, { Component } from "react";
 class UserClass extends Component {
   constructor(props) {
     super(props);
@@ -72,4 +72,4 @@ class UserClass extends Component {
   }
 }
 
-export default UserClass;
+export default React.memo(UserClass);

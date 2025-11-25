@@ -1,8 +1,10 @@
 import { useState } from "react";
+import React from "react";
 
 const User = (props)=>{
     const {name} = props;
-    const [count, setCount] = useState(0)
+    const [count, setCount] = useState(0);
+    console.log('child render called');
     return(
         <div className="user-card">
             <h1>Name: {name}</h1>
@@ -16,4 +18,4 @@ const User = (props)=>{
     )
 }
 
-export default User;
+export default React.memo(User);

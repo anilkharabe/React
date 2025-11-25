@@ -1,3 +1,4 @@
+import React from 'react';
 import {CDN_URL} from '../utils/constants'
 
 const RestaurantCard = (props) => {
@@ -18,4 +19,4 @@ const RestaurantCard = (props) => {
   );
 };
 
-export default RestaurantCard;
+export default React.memo(RestaurantCard);
