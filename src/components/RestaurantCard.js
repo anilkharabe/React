@@ -6,9 +6,9 @@ const RestaurantCard = (props) => {
   const { name, cuisines, avgRating, cloudinaryImageId } = resObj?.info; //destracturing + optional chaining
   const { deliveryTime } = resObj?.info?.sla;  // optional chaining
   return (
-    <div className="restaurant-card">
+    <div className="w-52 p-2.5 m-2.5 border rounded-lg">
       <img
-        className="res-logo"
+        className="rounded-lg"
         src={ CDN_URL+cloudinaryImageId }
       ></img>
       <h4>{name}</h4>

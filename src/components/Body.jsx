@@ -12,14 +12,14 @@ const Body = () => {
 
   return listOfResteaurants.length === 0 ? <h1>Loading/Fetching Restaurants Data...</h1> : (
     <div className="body">
-      <div className="filter">
+      <div className="p-4 m-4 flex">
         <div className="search">
 
-          <input type="text" className="search-box" value={searchText} onChange={(e) => {
+          <input type="text" className="border rounded-sm" value={searchText} onChange={(e) => {
             setSearchText(e.target.value);
           }} />
 
-          <button className="search-btn" onClick={() => {
+          <button className="bg-red-300 p-1.5 m-4 rounded-lg" onClick={() => {
             const filteredListOfRestaurants = listOfResteaurants.filter(res => {
               return res.info.name.toLowerCase().includes(searchText.toLowerCase());
             })
@@ -27,7 +27,7 @@ const Body = () => {
           }}>Search</button>
         </div>
         <button
-          className="filter-btn"
+          className="bg-red-300 p-1.5 m-4 rounded-lg"
           onClick={() => {
 
             const filteredList = listOfResteaurants.filter(res => {
@@ -41,7 +41,7 @@ const Body = () => {
         </button>
 
       </div>
-      <div className="restaurant-container">
+      <div className="flex flex-wrap">
         {filteredRestaurants.map((res) => {
           return <Link to={'/restaurant/' + res.info.id + '/' + res.info.name} key={res.info.id}> <RestaurantCard resObj={res} key={res.info.id} /> </Link>;
         })}

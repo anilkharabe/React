@@ -20,16 +20,16 @@ const About = () => {
   // console.log('Parent render called')
   return (
     <div>
-      <h1>About</h1>
-      <h3> This is About Page learning React JS </h3>
-      <h2>Abount Parent Count: {countAbout}</h2>
-      <button
+      <h1 className="text-7xl">About</h1>
+      <h3 className="text-3xl"> This is About Page learning React JS </h3>
+     
+      <button className="bg-red-300 p-1.5 m-4 rounded-lg"
         onClick={() => {
           setCountAbout(countAbout + 1);
         }}
       >
-        Increase count
-      </button>
+        Parent: Increase count
+      </button>{countAbout}
       {/* <UserClass /> */}
       <User name="Dummy" />
     </div>

@@ -17,22 +17,22 @@ const Header = () => {
   },[btnNameReact])
 
   return (
-    <div className="header">
+    <div className="flex justify-between bg-red-100">
       <div className="logoContainer">
         <img
-          className="logo"
+          className="w-36"
           src={ LOGO_URL }
         ></img>
       </div>
-      <div className="nav-items">
-        <ul>
-          <li> <Link to="/">Home</Link> </li>
-          <li> <Link to="/about">About Us</Link> </li>
-          <li> <Link to='/contact'>Contact Us</Link></li>
-          <li> <Link to='/grocery'>Grocery</Link></li>
-          <li> <Link to="/poc">POC</Link> </li>
-          <li>Cart</li>
-          <button className="login" onClick={()=>{
+      <div>
+        <ul className="flex items-center h-[100%]">
+          <li className="p-2.5 m-2.5"> <Link to="/">Home</Link> </li>
+          <li className="p-2.5 m-2.5"> <Link to="/about">About Us</Link> </li>
+          <li className="p-2.5 m-2.5"> <Link to='/contact'>Contact Us</Link></li>
+          <li className="p-2.5 m-2.5"> <Link to='/grocery'>Grocery</Link></li>
+          <li className="p-2.5 m-2.5"> <Link to="/poc">POC</Link> </li>
+          <li className="p-2.5 m-2.5">Cart</li>
+          <button className="bg-red-300 p-1.5 m-4 rounded-lg" onClick={()=>{
             // btnNameReact = 'Logout';
             btnNameReact === 'Logout' ? setBtnNameReact('Login') : setBtnNameReact('Logout');
           }}>{btnNameReact}</button>

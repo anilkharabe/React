@@ -7,13 +7,12 @@ const User = (props)=>{
     console.log('child render called');
     return(
         <div className="user-card">
-            <h1>Name: {name}</h1>
-            <h3>Location: New Delhi </h3>
-            <h4>Contact: 123456789</h4>
-            <h2>Count: {count}</h2>
-            <button onClick={() =>{
+            <h1 className="text-2xl">Name: {name}</h1>
+            <h3 className="text-1xl">Location: New Delhi </h3>
+            <h4 className="text-1xl">Contact: 123456789</h4>
+            <button className="bg-red-300 p-1.5 m-4 rounded-lg" onClick={() =>{
                 setCount(count + 1)
-            }}>Increase count</button>
+            }}>Child: Increase count</button>{count}
         </div>
     )
 }

@@ -1,4 +1,4 @@
-.header{
+/* .header{
   display: flex;
   justify-content: space-between;
 }
@@ -31,7 +31,6 @@
 .restaurant-card{
   margin: 10px;
   width: 200px;
-  /* height: 400px; */
   border: 1px solid black;
 }
 
@@ -53,4 +52,4 @@
   border: 1px solid black;
   margin: 10px;
   padding: 10px;
-}
+} */
