@@ -19,7 +19,7 @@ const About = () => {
 
   // console.log('Parent render called')
   return (
-    <div>
+    <div className="my-7">
       <h1 className="text-7xl">About</h1>
       <h3 className="text-3xl"> This is About Page learning React JS </h3>
      
