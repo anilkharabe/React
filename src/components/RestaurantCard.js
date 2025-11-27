@@ -1,21 +1,54 @@
-import React from 'react';
-import {CDN_URL} from '../utils/constants'
+import React from "react";
+import { CDN_URL } from "../utils/constants";
 
-const RestaurantCard = (props) => {
-  const { resObj } = props;  // destructuring
-  const { name, cuisines, avgRating, cloudinaryImageId } = resObj?.info; //destracturing + optional chaining
-  const { deliveryTime } = resObj?.info?.sla;  // optional chaining
+import Card from "@mui/material/Card";
+import CardMedia from "@mui/material/CardMedia";
+import CardContent from "@mui/material/CardContent";
+import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
+import StarIcon from "@mui/icons-material/Star";
+import AccessTimeIcon from "@mui/icons-material/AccessTime";
+
+const RestaurantCard = ({ resObj }) => {
+  const { name, cuisines, avgRating, cloudinaryImageId } = resObj?.info || {};
+  const { deliveryTime } = resObj?.info?.sla || {};
+
   return (
-    <div className="w-52 p-2.5 m-2.5 border rounded-lg">
-      <img
-        className="rounded-lg"
-        src={ CDN_URL+cloudinaryImageId }
-      ></img>
-      <h4>{name}</h4>
-      <h5>{cuisines.join(', ')}</h5>
-      <h5>{avgRating} Stars</h5>
-      <h5>Estimate: {deliveryTime} minutes</h5>
-    </div>
+    <Card
+      sx={{
+        width: 220,            // Tailwind w-52 ≈ 208px; using 220 for better MUI fit
+        m: 1.5,
+        borderRadius: 2,
+        overflow: "hidden",
+        boxShadow: 2
+      }}
+    >
+      <CardMedia
+        component="img"
+        height="140"
+        image={CDN_URL + cloudinaryImageId}
+        alt={name}
+        sx={{ borderRadius: 1 }}
+      />
+
+      <CardContent sx={{ p: 2 }}>
+        <Typography variant="h6" noWrap>
+          {name}
+        </Typography>
+
+        <Typography variant="body2" color="text.secondary" noWrap>
+          {cuisines?.join(", ")}
+        </Typography>
+
+        <Typography variant="body2" sx={{ mt: 1 }}>
+          <StarIcon fontSize="small" sx={{ color: "gold" }} /> {avgRating} Stars
+        </Typography>
+
+        <Typography variant="body2">
+          <AccessTimeIcon fontSize="small" sx={{ color: "gray" }} /> Estimate: {deliveryTime} min
+        </Typography>
+      </CardContent>
+    </Card>
   );
 };
 

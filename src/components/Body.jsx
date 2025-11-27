@@ -3,50 +3,82 @@ import RestaurantCard from "./RestaurantCard";
 import { Link } from "react-router-dom";
 import useRestaurantList from "../utils/useRestaurantList";
 
+// MUI Components
+import Box from "@mui/material/Box";
+import TextField from "@mui/material/TextField";
+import Button from "@mui/material/Button";
+import Grid from "@mui/material/Grid";
+import Typography from "@mui/material/Typography";
+
 const Body = () => {
   const [searchText, setSearchText] = useState("");
 
-  const { listOfResteaurants,
+  const {
+    listOfResteaurants,
     filteredRestaurants,
-    setFilteredRestaurants } = useRestaurantList();
+    setFilteredRestaurants,
+  } = useRestaurantList();
 
-  return listOfResteaurants.length === 0 ? <h1>Loading/Fetching Restaurants Data...</h1> : (
-    <div className="body">
-      <div className="p-4 m-4 flex">
-        <div className="search">
+  if (listOfResteaurants.length === 0)
+    return <Typography variant="h5">Loading/Fetching Restaurants Data...</Typography>;
 
-          <input type="text" className="border rounded-sm" value={searchText} onChange={(e) => {
-            setSearchText(e.target.value);
-          }} />
+  return (
+    <Box sx={{ p: 4 }}>
+      {/* Search + Top Rated Section */}
+      <Box sx={{ display: "flex", gap: 2, mb: 4, alignItems: "center" }}>
+        
+        {/* Search Input */}
+        <TextField
+          label="Search Restaurants"
+          variant="outlined"
+          size="small"
+          value={searchText}
+          onChange={(e) => setSearchText(e.target.value)}
+        />
 
-          <button className="bg-red-300 p-1.5 m-4 rounded-lg" onClick={() => {
-            const filteredListOfRestaurants = listOfResteaurants.filter(res => {
-              return res.info.name.toLowerCase().includes(searchText.toLowerCase());
-            })
-            setFilteredRestaurants(filteredListOfRestaurants);
-          }}>Search</button>
-        </div>
-        <button
-          className="bg-red-300 p-1.5 m-4 rounded-lg"
+        {/* Search Button */}
+        <Button
+          variant="contained"
+          color="error"
           onClick={() => {
-
-            const filteredList = listOfResteaurants.filter(res => {
-              return res.info.avgRating > 4.5;
-            });
-
-            setFilteredRestaurants(filteredList)
+            const filteredList = listOfResteaurants.filter((res) =>
+              res.info.name.toLowerCase().includes(searchText.toLowerCase())
+            );
+            setFilteredRestaurants(filteredList);
           }}
         >
-          Top Rated Restaurant
-        </button>
+          Search
+        </Button>
 
-      </div>
-      <div className="flex flex-wrap">
-        {filteredRestaurants.map((res) => {
-          return <Link to={'/restaurant/' + res.info.id + '/' + res.info.name} key={res.info.id}> <RestaurantCard resObj={res} key={res.info.id} /> </Link>;
-        })}
-      </div>
-    </div>
+        {/* Top Rated Button */}
+        <Button
+          variant="contained"
+          color="error"
+          onClick={() => {
+            const filteredList = listOfResteaurants.filter(
+              (res) => res.info.avgRating > 4.5
+            );
+            setFilteredRestaurants(filteredList);
+          }}
+        >
+          Top Rated Restaurants
+        </Button>
+      </Box>
+
+      {/* Restaurant Cards Grid */}
+      <Grid container spacing={2}>
+        {filteredRestaurants.map((res) => (
+          <Grid item xs={12} sm={6} md={4} lg={3} key={res.info.id}>
+            <Link
+              to={`/restaurant/${res.info.id}/${res.info.name}`}
+              style={{ textDecoration: "none" }}
+            >
+              <RestaurantCard resObj={res} />
+            </Link>
+          </Grid>
+        ))}
+      </Grid>
+    </Box>
   );
 };
 

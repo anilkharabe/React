@@ -1,44 +1,75 @@
 import { useState, useEffect } from "react";
 import { LOGO_URL } from "../utils/constants";
 import { Link } from "react-router-dom";
+import {btnStyle} from '../utils/styles'
+
+import AppBar from "@mui/material/AppBar";
+import Toolbar from "@mui/material/Toolbar";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
+import Stack from "@mui/material/Stack";
 
 const Header = () => {
+  const [btnNameReact, setBtnNameReact] = useState("Login");
 
-  let [btnNameReact, setBtnNameReact] = useState('Login');
-
-
-  // 1. useEffect will called after component render
-  // 2. if no dependecy array  => useEffect will called after every render
-  // 3. if dependecy array is empty ([]) => useEffect will called only once
-  // 4. if dependecy array is not empty and it has state variable as dependency then => useEffect will called after the state variable chages
-
-  useEffect(()=>{
-    console.log('useEffect called');
-  },[btnNameReact])
+  useEffect(() => {
+    console.log("useEffect called");
+  }, [btnNameReact]);
 
   return (
-    <div className="flex justify-between bg-red-100">
-      <div className="logoContainer">
-        <img
-          className="w-36"
-          src={ LOGO_URL }
-        ></img>
-      </div>
-      <div>
-        <ul className="flex items-center h-[100%]">
-          <li className="p-2.5 m-2.5"> <Link to="/">Home</Link> </li>
-          <li className="p-2.5 m-2.5"> <Link to="/about">About Us</Link> </li>
-          <li className="p-2.5 m-2.5"> <Link to='/contact'>Contact Us</Link></li>
-          <li className="p-2.5 m-2.5"> <Link to='/grocery'>Grocery</Link></li>
-          <li className="p-2.5 m-2.5"> <Link to="/poc">POC</Link> </li>
-          <li className="p-2.5 m-2.5">Cart</li>
-          <button className="bg-red-300 p-1.5 m-4 rounded-lg" onClick={()=>{
-            // btnNameReact = 'Logout';
-            btnNameReact === 'Logout' ? setBtnNameReact('Login') : setBtnNameReact('Logout');
-          }}>{btnNameReact}</button>
-        </ul>
-      </div>
-    </div>
+    <AppBar
+      position="static"
+      color="default"
+      elevation={1}
+      sx={{ bgcolor: "#fee2e2" }}
+    >
+      <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
+        {/* Logo */}
+        <Box>
+          <Box component="img" src={LOGO_URL} alt="logo" sx={{ width: 140 }} />
+        </Box>
+
+        {/* Navigation */}
+        <Stack direction="row" spacing={2} alignItems="center">
+          <Button component={Link} to="/" color="inherit">
+            Home
+          </Button>
+
+          <Button component={Link} to="/about" color="inherit">
+            About Us
+          </Button>
+
+          <Button component={Link} to="/contact" color="inherit">
+            Contact Us
+          </Button>
+
+          <Button component={Link} to="/grocery" color="inherit">
+            Grocery
+          </Button>
+
+          <Button component={Link} to="/poc" color="inherit">
+            POC
+          </Button>
+
+          <Typography variant="body1">Cart</Typography>
+
+          {/* Login/Logout Button */}
+          <Button
+            variant="contained"
+            // color="error"
+            sx={btnStyle}
+            onClick={() =>
+              setBtnNameReact((prev) =>
+                prev === "Logout" ? "Login" : "Logout"
+              )
+            }
+          >
+            {btnNameReact}
+          </Button>
+        </Stack>
+      </Toolbar>
+    </AppBar>
   );
 };
 
