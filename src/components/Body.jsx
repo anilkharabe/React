@@ -1,5 +1,5 @@
 import { useState } from "react";
-import RestaurantCard from "./RestaurantCard";
+import RestaurantCard, { withDiscountLabel } from "./RestaurantCard";
 import { Link } from "react-router-dom";
 import useRestaurantList from "../utils/useRestaurantList";
 
@@ -9,6 +9,19 @@ const Body = () => {
   const { listOfResteaurants,
     filteredRestaurants,
     setFilteredRestaurants } = useRestaurantList();
+
+  const ResturantCardDiscount = withDiscountLabel(RestaurantCard);
+
+  console.log('listOfResteaurants',listOfResteaurants)
+
+  function isEmptyObject(obj) {
+  // Check if the object is null or undefined first
+  if (obj === null || typeof obj === 'undefined') {
+    return false; // Or handle as an error, depending on requirements
+  }
+  return Object.keys(obj).length === 0;
+}
+
 
   return listOfResteaurants.length === 0 ? <h1>Loading/Fetching Restaurants Data...</h1> : (
     <div className="body">
@@ -43,7 +56,11 @@ const Body = () => {
       </div>
       <div className="flex flex-wrap">
         {filteredRestaurants.map((res) => {
-          return <Link to={'/restaurant/' + res.info.id + '/' + res.info.name} key={res.info.id}> <RestaurantCard resObj={res} key={res.info.id} /> </Link>;
+          return <Link to={'/restaurant/' + res.info.id + '/' + res.info.name} key={res.info.id}>
+
+            {isEmptyObject(res.info.aggregatedDiscountInfoV2) ? <RestaurantCard resObj={res} /> : <ResturantCardDiscount resObj={res}  />}
+
+            <RestaurantCard resObj={res} key={res.info.id} /> </Link>;
         })}
       </div>
     </div>

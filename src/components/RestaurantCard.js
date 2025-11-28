@@ -19,4 +19,21 @@ const RestaurantCard = (props) => {
   );
 };
 
+
+// HIgher Order component (Function)
+// Input => RestaurantCard(Component) =. RestaurantCardWithDiscount(component) 
+export const withDiscountLabel = (RestaurantCard)=>{
+  return (props)=>{
+    const {aggregatedDiscountInfoV3: discount} = props.resObj.info;
+    console.log('discount',discount);
+    return (
+      <div>
+        <label className='absolute bg-black text-white my-[11px] mx-2.5 p-2 rounded-lg'>{discount?.header} {discount?.subHeader} </label>
+        <RestaurantCard {...props}/>
+      </div>
+    )
+  }
+}
+
+
 export default React.memo(RestaurantCard);
