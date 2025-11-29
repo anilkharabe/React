@@ -1,18 +1,30 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+// import { useParams } from "react-router-dom";
 import resDetails from "../utils/resDetails";
+import RestaurantCategory from "./RestaurantCategory";
 
 const RestaruntDetails = () => {
-  const { resId, resName } = useParams();
+  // const { resId, resName } = useParams();
   const [resInfo, setResInfo] = useState(resDetails);
 
-  const {name, avgRating, totalRatings, cuisines, areaName} = resInfo.data.cards[2].card.card.info;
-  const {itemCards} = resInfo.data.cards[4].groupedCard.cardGroupMap.REGULAR.cards[2].card.card;
+  const {info} = resInfo.data.cards[2].card.card;
+
+  console.log('resInfo?.data?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR', resInfo?.data?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR)
+
+  const category = resInfo?.data?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR.cards.filter((c)=>{
+    return c.card.card['@type'] === 'type.googleapis.com/swiggy.presentation.food.v2.ItemCategory'
+  });
+
+  console.log('category', category)
+
+  // const {name, avgRating, totalRatings, cuisines, areaName} = resInfo.data.cards[2].card.card.info;
+  
+  // const {itemCards} = resInfo.data.cards[4].groupedCard.cardGroupMap.REGULAR.cards[2].card.card;
 
   useEffect(() => {
     // fetchData(); // not working as expected , try it later
   }, []);
-  console.log('rendering', resInfo)
+  console.log('resInfo', resInfo)
 
   const fetchData = async () => {
     try {
@@ -30,20 +42,18 @@ const RestaruntDetails = () => {
 
 
   return (
-    <div>
-      <h1> {name}</h1>
-      <h4> {avgRating}{"   ("+ totalRatings+"+ratings"+")"}</h4>
-      <h4> {cuisines.join(', ')}</h4>
-      <h4> {areaName}</h4>
-      
-      <div>
-        <h1>Menu</h1>
-        <ul>
-          {itemCards.map((menu)=>{
-            return <li key={menu.card.info.id}>{menu.card.info.name} for ₹{menu.card.info.price/100}</li>
-          })}
-        </ul>
-      </div>
+    <div className="text-center">
+      <h1 className="font-bold text-4xl my-6">{info.name}</h1>
+      <h1 className="text-2xl">{info.avgRating}({info.totalRatings})</h1>
+      <h1 className="text-2xl">{info.costForTwoMessage}</h1>
+      <h1 className="text-2xl">{info.cuisines.join(', ')}</h1>
+
+      {/** Categories accordian */}
+
+      {category.map((c)=>{
+         return <RestaurantCategory data = {c.card.card}/>
+      })}
+
     </div>
   );
 };

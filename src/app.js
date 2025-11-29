@@ -47,7 +47,7 @@ const appRouter = createBrowserRouter([
         element: <POC />,
       },
       {
-        path: '/restaurant/:resId/:resName',
+        path: '/restaurant/:resId',
         element: <RestaruntDetails />
       }
     ],

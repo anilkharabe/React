@@ -56,7 +56,7 @@ const Body = () => {
       </div>
       <div className="flex flex-wrap">
         {filteredRestaurants.map((res) => {
-          return <Link to={'/restaurant/' + res.info.id + '/' + res.info.name} key={res.info.id}>
+          return <Link to={'/restaurant/' + res.info.id + '/'} key={res.info.id}>
 
             {isEmptyObject(res.info.aggregatedDiscountInfoV2) ? <RestaurantCard resObj={res} /> : <ResturantCardDiscount resObj={res}  />}
 
