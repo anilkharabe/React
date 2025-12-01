@@ -12,7 +12,6 @@ class UserClass extends Component {
         contact:"123456789"
       }
     };
-    console.log('child constructor called');
   }
 
 
@@ -23,7 +22,6 @@ class UserClass extends Component {
     const {first: name} = json.results[0].name;
     const {city: location} = json.results[0].location;
     const {phone: contact} = json.results[0];
-    // console.log("result:", json.results[0]);
 
     this.setState({
       userInfo:{

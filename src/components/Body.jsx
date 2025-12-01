@@ -12,7 +12,6 @@ const Body = () => {
 
   const ResturantCardDiscount = withDiscountLabel(RestaurantCard);
 
-  console.log('listOfResteaurants',listOfResteaurants)
 
   function isEmptyObject(obj) {
   // Check if the object is null or undefined first

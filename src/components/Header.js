@@ -13,7 +13,6 @@ const Header = () => {
   // 4. if dependecy array is not empty and it has state variable as dependency then => useEffect will called after the state variable chages
 
   useEffect(()=>{
-    console.log('useEffect called');
   },[btnNameReact])
 
   return (
