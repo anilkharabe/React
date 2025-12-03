@@ -4,7 +4,6 @@ import React from "react";
 const User = (props)=>{
     const {name} = props;
     const [count, setCount] = useState(0);
-    console.log('child render called');
     return(
         <div className="user-card">
             <h1 className="text-2xl">Name: {name}</h1>

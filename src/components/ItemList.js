@@ -3,7 +3,6 @@ import { CDN_URL } from "../utils/constants";
 import UserContext from "../utils/UserContext";
 
 const ItemList = ({ items, dummyData }) => {
-  console.log('dummyData', dummyData)
   const {loggedInUser} = useContext(UserContext);
   return (
     <div>

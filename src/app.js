@@ -10,6 +10,8 @@ import Error from "./components/Error";
 import RestaruntDetails from "./components/RestaurantDetails";
 import { lazy, Suspense, useEffect } from "react";
 import UserContext from "./utils/UserContext";
+import { Provider } from "react-redux";
+import appStore from "./redux/appStore";
 
 const Grocery = lazy(() => import("./components/Grocery"));
 const About = lazy(() => import("./components/About"));
@@ -23,20 +25,19 @@ const AppLayout = () => {
       name: "Aniruddha",
     };
     setUserName(data.name);
-  },[]);
-  console.log("userName", userName);
+  }, []);
 
   const { loggedInUser } = useContext(UserContext);
 
   return (
-    <div>
-      <UserContext.Provider value={{ loggedInUser: userName, setUserName } }>
+    <Provider store={appStore}>
+      <UserContext.Provider value={{ loggedInUser: userName, setUserName }}>
         <div className="app">
           <Header />
           <Outlet />
         </div>
       </UserContext.Provider>
-    </div>
+    </Provider>
   );
 };
 

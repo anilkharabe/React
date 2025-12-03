@@ -14,7 +14,6 @@ const Body = () => {
   const ResturantCardDiscount = withDiscountLabel(RestaurantCard);
 
   const{setUserName, loggedInUser} = useContext(UserContext);
-  console.log('loggedInUser', loggedInUser)
 
 
   function isEmptyObject(obj) {

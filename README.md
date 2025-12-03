@@ -33,3 +33,12 @@
  *    -contact
  *    -social media links
  */
+
+ react-redux
+
+   1. Npm dependencis install - done
+   2. build/create the store  - done
+   3. connect our store to our  react - app - done
+   4. Create slice(cart slice)
+   5. Dispatch an action(add, update, delete)
+   6. Selector
