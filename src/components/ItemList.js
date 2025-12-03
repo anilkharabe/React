@@ -1,6 +1,10 @@
+import { useContext } from "react";
 import { CDN_URL } from "../utils/constants";
+import UserContext from "../utils/UserContext";
+
 const ItemList = ({ items, dummyData }) => {
   console.log('dummyData', dummyData)
+  const {loggedInUser} = useContext(UserContext);
   return (
     <div>
       {items.map((item) => (
@@ -17,6 +21,7 @@ const ItemList = ({ items, dummyData }) => {
               <span className="text-stone-600">
                 {item.card.info.description}
               </span>
+              <div><span>{loggedInUser}</span></div>
             </div>
             <div className="w-3/12 p-4">
               <div className="absolute">

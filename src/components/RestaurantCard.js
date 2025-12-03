@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import {CDN_URL} from '../utils/constants'
+import userContext from '../utils/UserContext';
 
 const RestaurantCard = (props) => {
   const { resObj } = props;  // destructuring
   const { name, cuisines, avgRating, cloudinaryImageId } = resObj?.info; //destracturing + optional chaining
   const { deliveryTime } = resObj?.info?.sla;  // optional chaining
+
+  const {loggedInUser} = useContext(userContext);
   return (
     <div className="w-52 p-2.5 m-2.5 border rounded-lg">
       <img
@@ -15,6 +18,7 @@ const RestaurantCard = (props) => {
       <h5>{cuisines.join(', ')}</h5>
       <h5>{avgRating} Stars</h5>
       <h5>Estimate: {deliveryTime} minutes</h5>
+      <h5>User : {loggedInUser}</h5>
     </div>
   );
 };

@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import RestaurantCard, { withDiscountLabel } from "./RestaurantCard";
 import { Link } from "react-router-dom";
 import useRestaurantList from "../utils/useRestaurantList";
+import UserContext from "../utils/UserContext";
 
 const Body = () => {
   const [searchText, setSearchText] = useState("");
@@ -11,6 +12,9 @@ const Body = () => {
     setFilteredRestaurants } = useRestaurantList();
 
   const ResturantCardDiscount = withDiscountLabel(RestaurantCard);
+
+  const{setUserName, loggedInUser} = useContext(UserContext);
+  console.log('loggedInUser', loggedInUser)
 
 
   function isEmptyObject(obj) {
@@ -51,6 +55,10 @@ const Body = () => {
         >
           Top Rated Restaurant
         </button>
+        <div>
+          <label> UserName : </label>
+          <input className="border rounded-sm" value={loggedInUser} onChange= {(e)=>setUserName(e.target.value)}></input>
+        </div>
 
       </div>
       <div className="flex flex-wrap">

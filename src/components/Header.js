@@ -1,6 +1,7 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { LOGO_URL } from "../utils/constants";
 import { Link } from "react-router-dom";
+import UserContext from "../utils/UserContext";
 
 const Header = () => {
 
@@ -14,6 +15,8 @@ const Header = () => {
 
   useEffect(()=>{
   },[btnNameReact])
+
+  const {loggedInUser} = useContext(UserContext);
 
   return (
     <div className="flex justify-between bg-red-100">
@@ -31,6 +34,7 @@ const Header = () => {
           <li className="p-2.5 m-2.5"> <Link to='/grocery'>Grocery</Link></li>
           <li className="p-2.5 m-2.5"> <Link to="/poc">POC</Link> </li>
           <li className="p-2.5 m-2.5">Cart</li>
+          <li className="p-2.5 m-2.5">{loggedInUser}</li>
           <button className="bg-red-300 p-1.5 m-4 rounded-lg" onClick={()=>{
             // btnNameReact = 'Logout';
             btnNameReact === 'Logout' ? setBtnNameReact('Login') : setBtnNameReact('Logout');
