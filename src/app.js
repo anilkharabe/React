@@ -12,6 +12,7 @@ import { lazy, Suspense, useEffect } from "react";
 import UserContext from "./utils/UserContext";
 import { Provider } from "react-redux";
 import appStore from "./redux/appStore";
+import Cart from "./components/Cart";
 
 const Grocery = lazy(() => import("./components/Grocery"));
 const About = lazy(() => import("./components/About"));
@@ -74,6 +75,11 @@ const appRouter = createBrowserRouter([
       {
         path: "/poc",
         element: <POC />,
+      },
+      
+      {
+        path: "/cart",
+        element: <Cart />,
       },
       {
         path: "/restaurant/:resId",

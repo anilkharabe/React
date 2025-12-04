@@ -19,6 +19,7 @@ const Header = () => {
 
   const {loggedInUser} = useContext(UserContext);
   const cart = useSelector((store)=> store.cart.items);
+  
   console.log("cart", cart)
 
   return (
@@ -36,7 +37,7 @@ const Header = () => {
           <li className="p-2.5 m-2.5"> <Link to='/contact'>Contact Us</Link></li>
           <li className="p-2.5 m-2.5"> <Link to='/grocery'>Grocery</Link></li>
           <li className="p-2.5 m-2.5"> <Link to="/poc">POC</Link> </li>
-          <li className="p-2.5 m-2.5 font-bold">Cart: ({cart.length} Items)</li>
+          <li className="p-2.5 m-2.5 font-bold"> <Link to="/cart">Cart: ({cart.length} Items)</Link></li>
           <li className="p-2.5 m-2.5">{loggedInUser}</li>
           <button className="bg-red-300 p-1.5 m-4 rounded-lg" onClick={()=>{
             // btnNameReact = 'Logout';

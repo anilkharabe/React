@@ -1,9 +1,18 @@
 import { useContext } from "react";
 import { CDN_URL } from "../utils/constants";
 import UserContext from "../utils/UserContext";
+import { useDispatch } from "react-redux";
+import {addItem} from '../redux/cartSlice'
 
 const ItemList = ({ items, dummyData }) => {
   const {loggedInUser} = useContext(UserContext);
+
+  const dispatch = useDispatch();
+
+  const handleAddItem = (item) =>{
+      dispatch(addItem(item))
+  }
+
   return (
     <div>
       {items.map((item) => (
@@ -24,8 +33,11 @@ const ItemList = ({ items, dummyData }) => {
             </div>
             <div className="w-3/12 p-4">
               <div className="absolute">
-                <button className="bg-white text-green-600 w-20 rounded-lg">
-                  Add
+                <button className="bg-white text-green-600 w-20 rounded-lg cursor-pointer" 
+                // onClick={handleAddItem}
+                onClick={() => handleAddItem(item)}
+                >
+                  Add +
                 </button>
               </div>
               <img src={CDN_URL + item.card.info.imageId}></img>
