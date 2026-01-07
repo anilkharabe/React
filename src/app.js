@@ -14,6 +14,10 @@ import { Provider } from "react-redux";
 import appStore from "./redux/appStore";
 import Cart from "./components/Cart";
 
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import ProtectedRoute from "./routes/ProtectedRoute";
+
 const Grocery = lazy(() => import("./components/Grocery"));
 const About = lazy(() => import("./components/About"));
 
@@ -31,14 +35,12 @@ const AppLayout = () => {
   const { loggedInUser } = useContext(UserContext);
 
   return (
-    <Provider store={appStore}>
-      <UserContext.Provider value={{ loggedInUser: userName, setUserName }}>
-        <div className="app">
-          <Header />
-          <Outlet />
-        </div>
-      </UserContext.Provider>
-    </Provider>
+    <UserContext.Provider value={{ loggedInUser: userName, setUserName }}>
+      <div className="app">
+        <Header />
+        <Outlet />
+      </div>
+    </UserContext.Provider>
   );
 };
 
@@ -72,18 +74,24 @@ const appRouter = createBrowserRouter([
           </Suspense>
         ),
       },
-      {
-        path: "/poc",
-        element: <POC />,
-      },
-      
-      {
-        path: "/cart",
-        element: <Cart />,
+       {
+        element: <ProtectedRoute />,
+        children: [
+          { path: "/cart", element: <Cart /> },
+          { path: "/poc", element: <POC /> },
+        ],
       },
       {
         path: "/restaurant/:resId",
         element: <RestaruntDetails />,
+      },
+      {
+        path: "/login",
+        element: <Login />,
+      },
+      {
+        path: "/register",
+        element: <Register />,
       },
     ],
     errorElement: <Error />,
@@ -93,4 +101,8 @@ const appRouter = createBrowserRouter([
 const rootElement = document.getElementById("root");
 
 const root = ReactDOM.createRoot(rootElement);
-root.render(<RouterProvider router={appRouter} />);
+root.render(
+  <Provider store={appStore}>
+    <RouterProvider router={appRouter} />
+  </Provider>
+);
