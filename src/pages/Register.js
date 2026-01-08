@@ -22,7 +22,7 @@ const Register = () => {
         name: e.target.name.value,
         email: e.target.email.value,
         password: e.target.password.value,
-        role: 'user'
+        role: "user",
       });
 
       navigate("/login");
@@ -34,19 +34,91 @@ const Register = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h2>Register</h2>
+    <div className="flex min-h-screen items-center justify-center bg-gray-100 px-4">
+      <div className="w-full max-w-md rounded-xl bg-white p-8 shadow-lg">
+        <h2 className="mb-6 text-center text-2xl font-semibold text-gray-800">
+          Create Account
+        </h2>
 
-      <input name="name" placeholder="Name" required /> <br></br> <br></br>
-      <input name="email" placeholder="Email" required /> <br></br> <br></br>
-      <input name="password" placeholder="password" type="password" required /> <br></br> <br></br>
+        <form onSubmit={handleSubmit} className="space-y-4">
+          {/* Name */}
+          <div>
+            <label className="mb-1 block text-sm font-medium text-gray-700">
+              Name
+            </label>
+            <input
+              name="name"
+              placeholder="Enter your name"
+              required
+              className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm
+                         focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200"
+            />
+          </div>
 
-      <button disabled={loading}>
-        {loading ? "Registering..." : "Register"}
-      </button>
+          {/* Email */}
+          <div>
+            <label className="mb-1 block text-sm font-medium text-gray-700">
+              Email
+            </label>
+            <input
+              name="email"
+              type="email"
+              placeholder="Enter your email"
+              required
+              className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm
+                         focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200"
+            />
+          </div>
 
-      {error && <p style={{ color: "red" }}>{error}</p>}
-    </form>
+          {/* Password */}
+          <div>
+            <label className="mb-1 block text-sm font-medium text-gray-700">
+              Password
+            </label>
+            <input
+              name="password"
+              type="password"
+              placeholder="Create a password"
+              required
+              className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm
+                         focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200"
+            />
+          </div>
+
+          {/* Error */}
+          {error && (
+            <div className="rounded-md bg-red-100 px-3 py-2 text-sm text-red-700">
+              {error}
+            </div>
+          )}
+
+          {/* Submit */}
+          <button
+            type="submit"
+            disabled={loading}
+            className={`w-full rounded-lg py-2 text-sm font-medium text-white
+              transition ${
+                loading
+                  ? "cursor-not-allowed bg-gray-400"
+                  : "bg-blue-600 hover:bg-blue-700"
+              }`}
+          >
+            {loading ? "Registering..." : "Register"}
+          </button>
+        </form>
+
+        {/* Footer */}
+        <p className="mt-4 text-center text-sm text-gray-600">
+          Already have an account?{" "}
+          <span
+            className="cursor-pointer text-blue-600 hover:underline"
+            onClick={() => navigate("/login")}
+          >
+            Login
+          </span>
+        </p>
+      </div>
+    </div>
   );
 };
 

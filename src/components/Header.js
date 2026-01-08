@@ -1,24 +1,33 @@
 import { useState, useEffect, useContext } from "react";
 import { LOGO_URL } from "../utils/constants";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import UserContext from "../utils/UserContext";
 import { useSelector } from "react-redux";
+import { logout } from "../redux/authSlice";
+import { useDispatch } from "react-redux";
 
 const Header = () => {
 
-  let [btnNameReact, setBtnNameReact] = useState('Login');
-
+  // let [btnNameReact, setBtnNameReact] = useState('Login');
+  const navigate = useNavigate();
 
   // 1. useEffect will called after component render
   // 2. if no dependecy array  => useEffect will called after every render
   // 3. if dependecy array is empty ([]) => useEffect will called only once
   // 4. if dependecy array is not empty and it has state variable as dependency then => useEffect will called after the state variable chages
 
-  useEffect(()=>{
-  },[btnNameReact])
+  // useEffect(()=>{
+  // },[btnNameReact])
+
+    const dispatch = useDispatch();
+   const handleLogout = () => {
+    dispatch(logout());
+    navigate("/login");
+  };
 
   const {loggedInUser} = useContext(UserContext);
   const cart = useSelector((store)=> store.cart.items);
+  const { isAuthenticated, user } = useSelector(store => store.auth);
   
   console.log("cart", cart)
 
@@ -38,11 +47,26 @@ const Header = () => {
           <li className="p-2.5 m-2.5"> <Link to='/grocery'>Grocery</Link></li>
           <li className="p-2.5 m-2.5"> <Link to="/poc">POC</Link> </li>
           <li className="p-2.5 m-2.5 font-bold"> <Link to="/cart">Cart: ({cart.length} Items)</Link></li>
-          <li className="p-2.5 m-2.5">{loggedInUser}</li>
-          <button className="bg-red-300 p-1.5 m-4 rounded-lg" onClick={()=>{
-            // btnNameReact = 'Logout';
-            btnNameReact === 'Logout' ? setBtnNameReact('Login') : setBtnNameReact('Logout');
-          }}>{btnNameReact}</button>
+          <li className="p-2.5 m-2.5">Hi  {user? user.name: 'User'}</li>
+          {!isAuthenticated ? (
+          <li>
+            <Link
+              to="/login"
+              className="rounded-lg bg-blue-600 px-4 py-1.5 text-sm font-medium text-white hover:bg-blue-700"
+            >
+              Login
+            </Link>
+          </li>
+        ) : (
+          <li>
+            <button
+              onClick={handleLogout}
+              className="rounded-lg bg-red-500 px-4 py-1.5 text-sm font-medium text-white hover:bg-red-600"
+            >
+              Logout
+            </button>
+          </li>
+        )}
         </ul>
       </div>
     </div>
