@@ -21,6 +21,9 @@ import ProtectedRoute from "./routes/ProtectedRoute";
 const Grocery = lazy(() => import("./components/Grocery"));
 const About = lazy(() => import("./components/About"));
 
+import RoleRoute from "./routes/RoleRoute";
+import AdminRestaurants from "./pages/AdminRestaurants";
+
 const AppLayout = () => {
   const [userName, setUserName] = useState("");
 
@@ -48,53 +51,44 @@ const appRouter = createBrowserRouter([
   {
     path: "/",
     element: <AppLayout />,
+    errorElement: <Error />,
     children: [
+      /* ---------- PUBLIC ---------- */
+      { path: "/login", element: <Login /> },
+      { path: "/register", element: <Register /> },
+
+      /* ---------- USER ONLY ---------- */
       {
-        path: "/",
-        element: <Body />,
+        element: <RoleRoute allowedRoles={["user"]} />,
+        children: [
+          { path: "/", element: <Body /> },
+          { path: "/cart", element: <Cart /> },
+          { path: "/restaurant/:resId", element: <RestaruntDetails /> },
+        ],
       },
+
+      /* ---------- ADMIN ONLY ---------- */
       {
-        path: "/about",
-        element: (
+        element: <RoleRoute allowedRoles={["admin"]} />,
+        children: [
+          { path: "/admin/restaurants", element: <AdminRestaurants /> },
+        ],
+      },
+
+      /* ---------- COMMON ---------- */
+      { path: "/about", element: (
           <Suspense fallback={<h1>Loading...</h1>}>
             <About />
           </Suspense>
-        ),
-      },
-      {
-        path: "/contact",
-        element: <Contact />,
-      },
-      {
-        path: "/grocery",
-        element: (
+        )},
+      { path: "/contact", element: <Contact /> },
+      { path: "/grocery", element:(
           <Suspense fallback={<h1>Loading...</h1>}>
-            {" "}
-            <Grocery />{" "}
+            <Grocery />
           </Suspense>
-        ),
-      },
-       {
-        element: <ProtectedRoute />,
-        children: [
-          { path: "/cart", element: <Cart /> },
-          { path: "/poc", element: <POC /> },
-        ],
-      },
-      {
-        path: "/restaurant/:resId",
-        element: <RestaruntDetails />,
-      },
-      {
-        path: "/login",
-        element: <Login />,
-      },
-      {
-        path: "/register",
-        element: <Register />,
-      },
+        ) },
+      { path: "/poc", element: <POC /> },
     ],
-    errorElement: <Error />,
   },
 ]);
 

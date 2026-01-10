@@ -28,6 +28,7 @@ const Header = () => {
   const {loggedInUser} = useContext(UserContext);
   const cart = useSelector((store)=> store.cart.items);
   const { isAuthenticated, user } = useSelector(store => store.auth);
+  const isAdmin = user?.role === "admin";
   
   console.log("cart", cart)
 
@@ -41,13 +42,29 @@ const Header = () => {
       </div>
       <div>
         <ul className="flex items-center h-[100%]">
-          <li className="p-2.5 m-2.5"> <Link to="/">Home</Link> </li>
+          {isAuthenticated && !isAdmin && ( // user should should be user
+            <li><Link to="/">Home</Link></li>
+          )}
           <li className="p-2.5 m-2.5"> <Link to="/about">About Us</Link> </li>
           <li className="p-2.5 m-2.5"> <Link to='/contact'>Contact Us</Link></li>
           <li className="p-2.5 m-2.5"> <Link to='/grocery'>Grocery</Link></li>
           <li className="p-2.5 m-2.5"> <Link to="/poc">POC</Link> </li>
-          <li className="p-2.5 m-2.5 font-bold"> <Link to="/cart">Cart: ({cart.length} Items)</Link></li>
+          {isAuthenticated && !isAdmin && ( // user should should be user
+            <li className="font-bold"> <Link to="/cart">Cart ({cart.length})</Link> </li>
+          )}
+
           <li className="p-2.5 m-2.5">Hi  {user? user.name: 'User'}</li>
+
+          {isAuthenticated && isAdmin && (
+            <li>
+              <Link
+                to="/admin/restaurants"
+              >
+                Manage Restaurants
+              </Link>
+            </li>
+          )}
+
           {!isAuthenticated ? (
           <li>
             <Link

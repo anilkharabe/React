@@ -4,6 +4,11 @@ import { registerApi } from "../services/authService";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
+const ROLES = {
+  USER: "user",
+  ADMIN: "admin",
+};
+
 const Register = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -22,7 +27,7 @@ const Register = () => {
         name: e.target.name.value,
         email: e.target.email.value,
         password: e.target.password.value,
-        role: "user",
+        role: e.target.role.value, // 👈 dynamic role
       });
 
       navigate("/login");
@@ -48,10 +53,10 @@ const Register = () => {
             </label>
             <input
               name="name"
-              placeholder="Enter your name"
               required
-              className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm
-                         focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200"
+              placeholder="Enter your name"
+              className="w-full rounded-lg border px-3 py-2 text-sm
+                         focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
             />
           </div>
 
@@ -63,10 +68,10 @@ const Register = () => {
             <input
               name="email"
               type="email"
-              placeholder="Enter your email"
               required
-              className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm
-                         focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200"
+              placeholder="Enter your email"
+              className="w-full rounded-lg border px-3 py-2 text-sm
+                         focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
             />
           </div>
 
@@ -78,11 +83,27 @@ const Register = () => {
             <input
               name="password"
               type="password"
-              placeholder="Create a password"
               required
-              className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm
-                         focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200"
+              placeholder="Create a password"
+              className="w-full rounded-lg border px-3 py-2 text-sm
+                         focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
             />
+          </div>
+
+          {/* Role (ENUM) */}
+          <div>
+            <label className="mb-1 block text-sm font-medium text-gray-700">
+              Role
+            </label>
+            <select
+              name="role"
+              defaultValue={ROLES.USER}
+              className="w-full rounded-lg border px-3 py-2 text-sm
+                         focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
+            >
+              <option value={ROLES.USER}>User</option>
+              <option value={ROLES.ADMIN}>Admin</option>
+            </select>
           </div>
 
           {/* Error */}
@@ -96,23 +117,21 @@ const Register = () => {
           <button
             type="submit"
             disabled={loading}
-            className={`w-full rounded-lg py-2 text-sm font-medium text-white
-              transition ${
-                loading
-                  ? "cursor-not-allowed bg-gray-400"
-                  : "bg-blue-600 hover:bg-blue-700"
-              }`}
+            className={`w-full rounded-lg py-2 text-sm font-medium text-white transition ${
+              loading
+                ? "bg-gray-400 cursor-not-allowed"
+                : "bg-blue-600 hover:bg-blue-700"
+            }`}
           >
             {loading ? "Registering..." : "Register"}
           </button>
         </form>
 
-        {/* Footer */}
         <p className="mt-4 text-center text-sm text-gray-600">
           Already have an account?{" "}
           <span
-            className="cursor-pointer text-blue-600 hover:underline"
             onClick={() => navigate("/login")}
+            className="cursor-pointer text-blue-600 hover:underline"
           >
             Login
           </span>
