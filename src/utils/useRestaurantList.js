@@ -1,31 +1,42 @@
-import {useState, useEffect} from "react";
+import { useState, useEffect } from "react";
 
 const useRestaurantList = () => {
   const [listOfResteaurants, setListOfRestaurants] = useState([]);
   const [filteredRestaurants, setFilteredRestaurants] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetchData();
+    fetchRestaurants();
   }, []);
 
-  const fetchData = async () => {
-    const data = await fetch(
-      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=18.5288974&lng=73.8665321&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
-    );
-    const json = await data.json();
+  const fetchRestaurants = async () => {
+    try {
+      setLoading(true);
 
-    setListOfRestaurants(
-      json.data.cards[1].card.card.gridElements.infoWithStyle.restaurants
-    );
-    setFilteredRestaurants(
-      json.data.cards[1].card.card.gridElements.infoWithStyle.restaurants
-    );
+      const res = await fetch("http://localhost:3000/restaurants");
+      if (!res.ok) {
+        throw new Error("Failed to fetch restaurants");
+      }
+
+      const json = await res.json();
+
+      setListOfRestaurants(json.restaurants);
+      setFilteredRestaurants(json.restaurants);
+    } catch (err) {
+      console.error(err);
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return {
     listOfResteaurants,
     filteredRestaurants,
     setFilteredRestaurants,
+    loading,
+    error,
   };
 };
 

@@ -29,6 +29,8 @@ const POC = () => {
         2. useMemo <br />
         3. useCallback <br />
         4. Language Traslator(Homework) <br />
+        5. useRef <br />
+
       </h1>
     </div>
   );
