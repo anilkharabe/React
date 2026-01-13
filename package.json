@@ -12,11 +12,13 @@
     "@reduxjs/toolkit": "^2.11.0",
     "@tailwindcss/postcss": "^4.1.17",
     "axios": "^1.13.2",
+    "formik": "^2.4.9",
     "react": "18.3",
     "react-dom": "^18.3.1",
     "react-redux": "^9.2.0",
     "react-router-dom": "^6.30.2",
-    "tailwindcss": "^4.1.17"
+    "tailwindcss": "^4.1.17",
+    "yup": "^1.7.1"
   },
   "devDependencies": {
     "buffer": "^6.0.3",
