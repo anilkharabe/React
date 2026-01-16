@@ -23,6 +23,8 @@ const About = lazy(() => import("./components/About"));
 
 import RoleRoute from "./routes/RoleRoute";
 import AdminRestaurants from "./pages/AdminRestaurants";
+import AdminDashboard from "./pages/AdminDashboard";
+
 
 const AppLayout = () => {
   const [userName, setUserName] = useState("");
@@ -71,6 +73,7 @@ const appRouter = createBrowserRouter([
       {
         element: <RoleRoute allowedRoles={["admin"]} />,
         children: [
+          { path: "/admin/dashboard", element: <AdminDashboard /> },
           { path: "/admin/restaurants", element: <AdminRestaurants /> },
         ],
       },

@@ -45,6 +45,15 @@ const Header = () => {
           {isAuthenticated && !isAdmin && ( // user should should be user
             <li><Link to="/">Home</Link></li>
           )}
+          {isAuthenticated && isAdmin && (
+            <li>
+              <Link
+                to="/admin/dashboard"
+              >
+                Dashboard
+              </Link>
+            </li>
+          )}
           <li className="p-2.5 m-2.5"> <Link to="/about">About Us</Link> </li>
           <li className="p-2.5 m-2.5"> <Link to='/contact'>Contact Us</Link></li>
           <li className="p-2.5 m-2.5"> <Link to='/grocery'>Grocery</Link></li>

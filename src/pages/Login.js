@@ -12,18 +12,24 @@ import { useNavigate } from "react-router-dom";
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { loading, error, isAuthenticated } = useSelector(
+  const { loading, error, isAuthenticated, user } = useSelector(
     state => state.auth
   );
+
+  const isAdmin = user?.role === "admin";
 
   useEffect(() => {
     dispatch(clearError());
   }, [dispatch]);
 
   useEffect(() => {
-    if (isAuthenticated) {
+    if (isAuthenticated  && !isAdmin) {
       navigate("/");
     }
+    if(isAuthenticated  && isAdmin){
+      navigate("/admin/dashboard");
+    }
+  
   }, [isAuthenticated, navigate]);
 
   const handleSubmit = async e => {
