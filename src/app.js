@@ -24,6 +24,7 @@ const About = lazy(() => import("./components/About"));
 import RoleRoute from "./routes/RoleRoute";
 import AdminRestaurants from "./pages/AdminRestaurants";
 import AdminDashboard from "./pages/AdminDashboard";
+import ErrorBoundary from "./components/ErrorBoundary";
 
 
 const AppLayout = () => {
@@ -42,8 +43,9 @@ const AppLayout = () => {
   return (
     <UserContext.Provider value={{ loggedInUser: userName, setUserName }}>
       <div className="app">
-        <Header />
-        <Outlet />
+        
+          <Header />
+          <Outlet />
       </div>
     </UserContext.Provider>
   );
@@ -90,7 +92,7 @@ const appRouter = createBrowserRouter([
             <Grocery />
           </Suspense>
         ) },
-      { path: "/poc", element: <POC /> },
+      { path: "/poc", element: <><ErrorBoundary fallback={<div>Oops! Try refreshing.</div>}><POC /></ErrorBoundary></>   },
     ],
   },
 ]);
