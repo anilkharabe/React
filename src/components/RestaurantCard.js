@@ -3,11 +3,9 @@ import {CDN_URL} from '../utils/constants'
 import userContext from '../utils/UserContext';
 
 const RestaurantCard = (props) => {
-  console.log('props', props)
   const { resObj } = props;  // destructuring
   const { name, cuisines, avgRating, cloudinaryImageId, deliveryTime } = resObj; //destracturing + optional chaining
 
-  console.log('resObj?.info', resObj?.info)
 
   const {loggedInUser} = useContext(userContext);
   return (

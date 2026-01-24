@@ -8,7 +8,7 @@ import { RouterProvider, createBrowserRouter, Outlet } from "react-router-dom";
 import Contact from "./components/Contact";
 import Error from "./components/Error";
 import RestaruntDetails from "./components/RestaurantDetails";
-import { lazy, Suspense, useEffect } from "react";
+import { lazy, Suspense } from "react";
 import UserContext from "./utils/UserContext";
 import { Provider } from "react-redux";
 import appStore from "./redux/appStore";
@@ -65,9 +65,9 @@ const appRouter = createBrowserRouter([
       {
         element: <RoleRoute allowedRoles={["user"]} />,
         children: [
-          { path: "/", element: <Body /> },
-          { path: "/cart", element: <Cart /> },
-          { path: "/restaurant/:resId", element: <RestaruntDetails /> },
+          // { path: "/", element: <Body /> },
+          // { path: "/cart", element: <Cart /> },
+          // { path: "/restaurant/:resId", element: <RestaruntDetails /> },
         ],
       },
 
@@ -81,6 +81,9 @@ const appRouter = createBrowserRouter([
       },
 
       /* ---------- COMMON ---------- */
+      { path: "/", element: <Body /> },
+      { path: "/cart", element: <Cart /> },
+      { path: "/restaurant/:resId", element: <RestaruntDetails /> },
       { path: "/about", element: (
           <Suspense fallback={<h1>Loading...</h1>}>
             <About />

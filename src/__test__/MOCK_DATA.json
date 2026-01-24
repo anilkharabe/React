@@ -1,0 +1,19 @@
+{
+    "_id": "69646124c58b9970c72ba381",
+    "name": "Kerala Cafe",
+    "cloudinaryImageId": "RX_THUMBNAIL/IMAGES/VENDOR/2024/12/3/8789e650-aeb7-4189-ab0a-65b7b23cdfec_80593.jpg",
+    "cuisines": [
+        "Kerala",
+        "Biryani",
+        "Coastal",
+        "South Indian",
+        "Seafood",
+        "Indian"
+    ],
+    "avgRating": 4,
+    "deliveryTime": 10,
+    "isActive": true,
+    "createdAt": "2026-01-12T02:49:08.998Z",
+    "updatedAt": "2026-01-12T02:49:08.998Z",
+    "__v": 0
+}

@@ -25,12 +25,17 @@ const Header = () => {
     navigate("/login");
   };
 
+  const [flipCoin, setFlipCoin] = useState('1')
   const {loggedInUser} = useContext(UserContext);
   const cart = useSelector((store)=> store.cart.items);
   const { isAuthenticated, user } = useSelector(store => store.auth);
   const isAdmin = user?.role === "admin";
   
   console.log("cart", cart)
+
+  const flipCoint = () => {
+      flipCoin ==='1' ? setFlipCoin('0') : setFlipCoin('1')
+  };
 
   return (
     <div className="flex justify-between bg-red-100">
@@ -42,9 +47,17 @@ const Header = () => {
       </div>
       <div>
         <ul className="flex items-center h-[100%]">
-          {isAuthenticated && !isAdmin && ( // user should should be user
+          <li>
+            <button
+              onClick={flipCoint}
+              className="rounded-lg bg-red-500 px-4 py-1.5 text-sm font-medium text-white hover:bg-red-600"
+            >
+              Flip -{flipCoin}
+            </button>
+          </li>
+          {/* {isAuthenticated && !isAdmin && ( // user should should be user */}
             <li><Link to="/">Home</Link></li>
-          )}
+          {/* )} */}
           {isAuthenticated && isAdmin && (
             <li>
               <Link
@@ -58,9 +71,9 @@ const Header = () => {
           <li className="p-2.5 m-2.5"> <Link to='/contact'>Contact Us</Link></li>
           <li className="p-2.5 m-2.5"> <Link to='/grocery'>Grocery</Link></li>
           <li className="p-2.5 m-2.5"> <Link to="/poc">POC</Link> </li>
-          {isAuthenticated && !isAdmin && ( // user should should be user
+          {/* {isAuthenticated && !isAdmin && ( // user should should be user */}
             <li className="font-bold"> <Link to="/cart">Cart ({cart.length})</Link> </li>
-          )}
+          {/* )} */}
 
           <li className="p-2.5 m-2.5">Hi  {user? user.name: 'User'}</li>
 

@@ -16,7 +16,8 @@ const ItemList = ({ items, dummyData }) => {
   return (
     <div>
       {items.map((item) => (
-        <div key={item.card.info.id}>
+        <div data-testid='FoodItems'
+         key={item.card.info.id}>
           <div className="flex">
             <div
               className="p-2 m-2 border-gray-500 text-left border-b-2 w-9/12"

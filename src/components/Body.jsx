@@ -36,7 +36,7 @@ const Body = () => {
 
           <button className="bg-red-300 p-1.5 m-4 rounded-lg" onClick={() => {
             const filteredListOfRestaurants = listOfResteaurants.filter(res => {
-              return res.info.name.toLowerCase().includes(searchText.toLowerCase());
+              return res.name.toLowerCase().includes(searchText.toLowerCase());
             })
             setFilteredRestaurants(filteredListOfRestaurants);
           }}>Search</button>
