@@ -6,7 +6,10 @@ import { useSelector } from "react-redux";
 import { logout } from "../redux/authSlice";
 import { useDispatch } from "react-redux";
 
+
 const Header = () => {
+  console.log("API BASE URL:", process.env.API_BASE_URL);
+
 
   // let [btnNameReact, setBtnNameReact] = useState('Login');
   const navigate = useNavigate();

@@ -14,7 +14,7 @@ const useRestaurantList = () => {
     try {
       setLoading(true);
 
-      const res = await fetch("http://localhost:3000/restaurants");
+      const res = await fetch(`${process.env.API_BASE_URL}/restaurants`);
       if (!res.ok) {
         throw new Error("Failed to fetch restaurants");
       }
