@@ -4,7 +4,9 @@
   "description": "this is learning project",
   "scripts": {
     "start": "parcel index.html",
-    "test": "jest"
+    "test": "jest",
+    "build": "parcel build index.html --dist-dir build",
+    "build:copy": "npm run build && cp -r build/* ../Node/public/"
   },
   "author": "Aniruddha",
   "license": "ISC",
